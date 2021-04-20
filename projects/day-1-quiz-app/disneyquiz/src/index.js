@@ -12,6 +12,9 @@ class DisneyQuiz extends Component {
   }
 }
 
+ReactDOM.render(<DisneyQuiz />, document.getElementById("root"));
+
+
 
 
 
