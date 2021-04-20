@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./assets/style.css";
 import quizService from "./quizService";
 import QuestionCard from "./components/QuestionCard";
+import QuizResult from "./components/QuizResult";
 
 class Quiz extends Component {
   state = {
@@ -29,6 +30,14 @@ class Quiz extends Component {
       response: this.state.response < 5 ? this.state.response + 1 : 5
     })
   }
+
+  playAgain = () => {
+    this.getQuestions();
+    this.setState({
+      score: 0,
+      response: 0
+    })
+  }
   componentDidMount() {
     this.getQuestions();
   }
@@ -50,7 +59,7 @@ class Quiz extends Component {
           )}
 
 
-          {this.state.response === 5 ? (<h2>Hiyo, you scored {this.state.score}!</h2>) : null }
+          {this.state.response === 5 ? (<QuizResult score={this.state.score} playAgain={this.playAgain} />) : null }
       </div>
     );
   }
