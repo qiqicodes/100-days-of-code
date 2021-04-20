@@ -23,9 +23,11 @@ class Quiz extends Component {
   render() {
     return (
       <div className="container">
-        <div className="title">Disney Quiz</div>
+        <div className="title">Quiz</div>
         { this.state.questionBank.length > 0 && this.state.questionBank.map(({ question, answers, 
-          correct, questionId }) => ( <h4>{ question }</h4>))}
+          correct, questionId }) => ( 
+            <QuestionCard question={ question } options={ answers } key={ questionId } />
+          ))}
       </div>
     )
   }
