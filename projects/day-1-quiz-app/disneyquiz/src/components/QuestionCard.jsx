@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
-const QuestionCard = ({ question, options }) => {
-    return (
-        <div className="questionBox">
-            <div className="question"> { question }</div>
-        </div>
-    )
-}
+const QuestionCard = ({ question, options, selected }) => {
+  const [answer, setAnswer] = useState(options);
+  return (
+    <div className="questionBox">
+      <div className="question"> {question}</div>
+      {answer.map((text, index) => (
+        <button
+          key={index}
+          className="answerBtn"
+          onClick={() => {
+            setAnswer([text]);
+            selected(text);
+          }}
+        >
+          {text}
+        </button>
+      ))}
+    </div>
+  );
+};
 
 export default QuestionCard;
