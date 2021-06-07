@@ -9,7 +9,7 @@ class Quiz extends Component {
   state = {
     questionBank: [],
     score: 0,
-    response: 0
+    response: 0,
   };
 
   getQuestions = () => {
@@ -23,21 +23,21 @@ class Quiz extends Component {
   computeAnswer = (answer, correctAnswer) => {
     if (answer === correctAnswer) {
       this.setState({
-        score: this.state.score + 1
+        score: this.state.score + 1,
       });
     }
     this.setState({
-      response: this.state.response < 5 ? this.state.response + 1 : 5
-    })
-  }
+      response: this.state.response < 5 ? this.state.response + 1 : 5,
+    });
+  };
 
   playAgain = () => {
     this.getQuestions();
     this.setState({
       score: 0,
-      response: 0
-    })
-  }
+      response: 0,
+    });
+  };
   componentDidMount() {
     this.getQuestions();
   }
@@ -46,20 +46,21 @@ class Quiz extends Component {
       <div className="container">
         <div className="title">Quiz</div>
         {this.state.questionBank.length > 0 &&
-        this.state.response < 5 &&
+          this.state.response < 5 &&
           this.state.questionBank.map(
             ({ question, answers, correct, questionId }) => (
               <QuestionCard
                 question={question}
                 options={answers}
                 key={questionId}
-                selected={answer => this.computeAnswer(answer, correct)}
+                selected={(answer) => this.computeAnswer(answer, correct)}
               />
             )
           )}
 
-
-          {this.state.response === 5 ? (<QuizResult score={this.state.score} playAgain={this.playAgain} />) : null }
+        {this.state.response === 5 ? (
+          <QuizResult score={this.state.score} playAgain={this.playAgain} />
+        ) : null}
       </div>
     );
   }
